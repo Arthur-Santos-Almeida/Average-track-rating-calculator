@@ -17,7 +17,7 @@ def getRatings():
             matches = re.findall(ratings_pattern, script_content)
             for match in matches:
                 index, rating = map(int, match)
-                ratingsArray.append(rating)
+                ratingsArray.append(rating / 2)
     
     return ratingsArray
 
@@ -57,11 +57,12 @@ def calculate_and_print_results(lista1, lista2):
         expressao += f"({num1}*{num2})+"
 
     expressao = expressao[:-1]  # Remove o último '+'
+    rating_album = (soma_ponderada / soma_lista2) * 2
 
     with open("resultado.txt", "w") as f:  # Abre o arquivo em modo de escrita
         print(expressao, file=f)          # Escreve a expressão no arquivo
         print(soma_lista2, file=f)         # Escreve a soma de lista2 no arquivo
-        print(soma_ponderada / soma_lista2, file=f)  # Escreve a média ponderada no arquivo
+        print(f"{rating_album:.2f}", file=f)  # Escreve a média ponderada formatada
 
 ratings = getRatings()
 durations = extract_track_durations()
