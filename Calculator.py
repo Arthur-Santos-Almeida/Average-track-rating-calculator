@@ -52,9 +52,10 @@ def calculate_and_print_results(lista1, lista2):
     soma_lista2 = 0
     expressao = ""
     for num1, num2 in zip(lista1, lista2):
-        soma_ponderada += num1 * num2
-        soma_lista2 += num2
-        expressao += f"({num1}*{num2})+"
+        if num1 != 0:
+            soma_ponderada += num1 * num2
+            soma_lista2 += num2
+            expressao += f"({num1}*{num2})+"
 
     expressao = expressao[:-1]  # Remove o último '+'
     rating_album = (soma_ponderada / soma_lista2) * 2
