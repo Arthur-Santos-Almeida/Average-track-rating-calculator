@@ -28,11 +28,13 @@ def extract_track_durations():
     soup = BeautifulSoup(html, 'html.parser')
 
     durations = []
-    for span in soup.find_all('span', {'class': 'tracklist_title'}):  # Encontra elementos com a classe "tracklist_title"
-        if span.find('span', itemprop='name'):  # Verifica se existe um filho com o itemprop "name"
-            duration_span = span.find('span', {'data-inseconds': True})  
-            if duration_span:
-                durations.append(int(duration_span['data-inseconds']))  # Extrai o valor se existir
+    for track in soup.find_all('li', class_='track'):  # Encontra todos os elementos li com a classe "track"
+        duration_span = track.find('span', {'data-inseconds': True, 'itemprop': 'duration'})  # Busca apenas spans com itemprop="duration"
+        if duration_span:
+            seconds = int(duration_span['data-inseconds'])
+
+            if seconds != 0:
+                durations.append(seconds)  # Extrai o valor se existir
 
     return durations
 

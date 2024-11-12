@@ -1,2 +1,6 @@
 Calculator.exe
+Calculator.spec
 resultado.txt
+.ipynb_checkpoints
+build
+dist
